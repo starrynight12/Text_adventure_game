@@ -1,0 +1,35 @@
+{
+  "rooms": {
+    "entrance_hall": {
+      "name": "Entrance Hall",
+      "description": "Crumbling limestone walls...",
+      "exits": { "north": "hieroglyph_chamber" },
+      "items": [ "scroll", "urn", "statue" ],
+      "actions": {
+        "read_scroll": {
+          "prerequisite": [],
+          "result": "Reveals clue about sand traps",
+          "achievement": "Scholar of the Sands"
+        }
+      }
+    },
+    "hieroglyph_chamber": {
+      "name": "Chamber of Hieroglyphs",
+      "description": "Blue hieroglyphs glow...",
+      "exits": { "east": "hall_of_traps" },
+      "items": [ "khopesh", "obsidian_mirror" ]
+    }
+  },
+  "items": {
+    "scroll": {
+      "name": "Ancient Scroll",
+      "description": "A dusty parchment with hieroglyphs",
+      "takeable": true
+    },
+    "khopesh": {
+      "name": "Rusted Khopesh",
+      "description": "A sickle-shaped sword",
+      "takeable": true
+    }
+  }
+}
