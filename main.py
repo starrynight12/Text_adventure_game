@@ -12,7 +12,10 @@ def main():
         command = input("> ")
         verb, noun = parse_command(command)  # From Step 2
         
-        if verb == "go":
+        
+        if verb == "quit":
+            break
+        elif verb == "go":
             if game.move_to_room(noun):
                 print(f"Moved to {game.current_room.name}")
             else:
@@ -24,3 +27,5 @@ def main():
                 game.inventory.append(item)
                 game.current_room.items.remove(item)
                 print(f"You took the {item.name}")
+        else:
+            print("I don't understand that.")
