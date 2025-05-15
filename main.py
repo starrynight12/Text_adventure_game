@@ -6,19 +6,25 @@ import re
 VERBS = {
     "go": ["move", "walk", "head", "travel", "enter", "proceed", "advance"],
     "take": ["grab", "pick", "steal", "collect", "acquire"],
-    "use": ["utilize", "employ", "apply", "operate" "open", "unlock", "activate", "light", "cut"],
+    "use": ["utilize", "employ", "apply", "operate" "open", "unlock",
+            "activate", "light", "cut"],
     "inspect": ["read", "look", "examine", "see", "view", "observe", "glance"],
-    "quit": ["terminate", "abandon"],
+    "smash": ["break", "shatter", "crack", "destroy"],
+    "push": ["move", "shove", "tilt", "nudge"],
     "run": ["exit", "leave", "stop", "end", "run", "flee", "es"],
     "help": ["assist", "aid", "guide", "support", "advise"],
-    "inventory": ["items", "pack", "belongings", "gear", "stuff"]
+    "inventory": ["items", "pack", "belongings", "gear", "stuff"],
+    "quit": ["terminate", "abandon"]
 }
 
-# Valid directions and nouns
+# direction/nouns
 DIRECTIONS = ["north", "south", "east", "west", "up", "down"]
-NOUNS = ["key", "torch", "door", "scroll", "urn", "statue", "mirror"]
+NOUNS = [
+    "key", "torch", "door", "scroll", "urn", "statue", "mirror", 
+    "ankh", "map", "flame", "rope", "scarab", "compartment"
+]
 
-
+# parser
 def parse_input(user_input):
     pattern = r'^\s*(\w+)(?:\s+(?:the\s+)?(\w+))?\s*$'
     match = re.match(pattern, user_input.strip().lower())
@@ -49,9 +55,11 @@ def parse_command(user_input):
     return base_verb, None
 
 
+# main game class
 class Game:
     def __init__(self, data):
         self.rooms = {int(k): v for k, v in data['rooms'].items()}
+        self.items = data.get('items', {})
         self.inventory = data['starting_inventory']
         self.health = data['health']
         self.achievements = []
@@ -62,6 +70,9 @@ class Game:
         print("\nYour Inventory:")
         for item, info in self.inventory.items():
             print(f"- {item}: {info['description']}")
+
+    def get_item_data(self, item_name):
+        return self.items.get(item_name, {"description": "An unknown item."})
 
     def enter_room(self, room_id):
         room = self.rooms.get(room_id)
@@ -85,17 +96,51 @@ class Game:
         interactions = room.get("interactions", [])
 
         for action in interactions:
-            if action["command"] == verb:
+            cmd_parts = action["command"].split()
+            action_verb = normalize_verb(cmd_parts[0])
+            action_noun = cmd_parts[1] if len(cmd_parts) > 1 else None
+
+            if verb == action_verb and (noun == action_noun or not action_noun):
+                # Check item requirements
+                required = action.get("requires", [])
+                if required:
+                    missing = [item for item in required if item not in self.inventory]
+                    if missing:
+                        print(f"You need {', '.join(missing)} to do that.")
+                        return
+
+                # Print result
                 print(f"\n{action['result']}")
 
+                # Add item
+                if "add_item" in action:
+                    item_name = action["add_item"]
+                    item_data = self.get_item_data(item_name)
+                    if item_name not in self.inventory:
+                        self.inventory[item_name] = item_data
+                        print(f"You obtained: {item_name}")
+
+                # Mark critical item
+                if action.get("critical_item"):
+                    self.collected_items.append(action["add_item"])
+
+                # Achievements
+                if "achievement" in action:
+                    ach = action["achievement"]
+                    if ach not in self.achievements:
+                        self.achievements.append(ach)
+                        print(f"Achievement unlocked: {ach}")
+
+                # Game over
                 if action.get("game_over"):
-                    print("\nGame Over.")
+                    print("Game Over.")
                     exit()
 
+                # Next room
                 if "next_room" in action:
                     self.current_room = action["next_room"]
 
-                return  
+                return
 
         if verb == "help":
             print("\nYou can try commands like:")
@@ -143,6 +188,7 @@ def load_game(filename):
     return Game(data)
 
 
+# starter function
 if __name__ == "__main__":
     game = load_game('game_data.json')
     game.run()

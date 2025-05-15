@@ -1,13 +1,21 @@
 {
   "health": 100,
+  "items": {
+    "bronze_key": {
+      "description": "Opens certain ancient locks."
+    },
+    "map_scrap": {
+      "description": "A cryptic piece of parchment showing a hidden room."
+    }
+  },
   "starting_inventory": {
-    "Torch": {
+    "torch": {
       "description": "Lights dark rooms."
     },
-    "Chisel": {
+    "chisel": {
       "description": "Breaks objects/opens compartments."
     },
-    "Rope": {
+    "rope": {
       "description": "Stabilizes unstable structures or crosses pits."
     }
   },
@@ -35,15 +43,53 @@
 
     ]
   },
-
     "1": {
-      "name": "Antechamber",
-      "description": "Dusty walls show faint markings. There's a locked compartment here.",
-      "interactions": [
-        "Use chisel on compartment.",
-        "Go back."
-      ],
-      "critical_item": "Bronze Key"
+    "name": "Entrance Hall",
+    "description": "You stand in a crumbling limestone hall. Faded paintings of Pharaoh Djoser adorn the walls, his cartouche barely visible. Sunlight streams through cracks in the collapsed ceiling, illuminating a cracked urn, a broken statue of Anubis, and a dusty scroll. To the north, a heavy stone door blocks your path.",
+    "critical_item": "bronze_key",
+    "interactions": [
+      {
+        "command": "examine scroll",
+        "result": "You unroll the dusty scroll:\n\"Beware the path of sand; only the wise may walk unscathed. The scarab’s wings are bound by five: key, flame, mirror, scale, and life.\"",
+        "achievement": "Scholar of the Sands"
+      },
+      {
+        "command": "smash urn",
+        "requires": ["chisel"],
+        "result": "The urn shatters! Inside you find:\n- A map scrap: 'Hall of Traps lies east of Anubis' judgment'",
+        "add_item": "map_scrap",
+        "achievement": "Destructive Curiosity"
+      },
+      {
+        "command": "inspect statue",
+        "requires": ["chisel"],
+        "result": "You pry open the compartment with your chisel!\nObtained BRONZE KEY!",
+        "add_item": "bronze_key",
+        "achievement": "Jackal’s Secret",
+        "critical_item": true
+      },
+      {
+        "command": "open door",
+        "requires": ["bronze_key"],
+        "result": "The bronze key fits! The stone door grinds open...",
+        "next_room": 2
+      },
+      {
+        "command": "open door",
+        "result": "The door shows five slots. A carving warns:\n\"Only those who gather the pharaoh's trials may pass\""
+      },
+      {
+        "command": "push statue",
+        "requires": ["rope"],
+        "result": "You stabilize the statue with your rope!\nRevealed: Hidden passage to Room 5",
+        "next_room": 5
+      },
+      {
+        "command": "push statue",
+        "result": "The statue collapses! (-15 HP)",
+        "health_impact": -15
+      }
+    ]
     },
     "2": {
       "name": "Hall of Mirrors",
