@@ -1,35 +1,105 @@
 {
-  "rooms": {
-    "entrance_hall": {
-      "name": "Entrance Hall",
-      "description": "Crumbling limestone walls...",
-      "exits": { "north": "hieroglyph_chamber" },
-      "items": [ "scroll", "urn", "statue" ],
-      "actions": {
-        "read_scroll": {
-          "prerequisite": [],
-          "result": "Reveals clue about sand traps",
-          "achievement": "Scholar of the Sands"
-        }
-      }
+  "health": 100,
+  "starting_inventory": {
+    "Torch": {
+      "description": "Lights dark rooms."
     },
-    "hieroglyph_chamber": {
-      "name": "Chamber of Hieroglyphs",
-      "description": "Blue hieroglyphs glow...",
-      "exits": { "east": "hall_of_traps" },
-      "items": [ "khopesh", "obsidian_mirror" ]
+    "Chisel": {
+      "description": "Breaks objects/opens compartments."
+    },
+    "Rope": {
+      "description": "Stabilizes unstable structures or crosses pits."
     }
   },
-  "items": {
-    "scroll": {
-      "name": "Ancient Scroll",
-      "description": "A dusty parchment with hieroglyphs",
-      "takeable": true
+  "rooms": {
+    "0": {
+    "name": "Tomb Entrance",
+    "description": "You stand in front of an old doorway, framed by cobwebs. You feel energized and maybe a little scared at the same time. Your leather satchel contains: - Torch - Matchsticks - Bronze chisel - Coil of rope",
+    "critical_item": null,
+    "intro": true,
+    "interactions": [
+      {
+        "command": "go",
+        "result": "You light your torch and step through the ancient doorway... The air grows cold as you enter the pyramid proper.",
+        "next_room": 1
+      },
+      {
+        "command": "inventory",
+        "result": "You have a torch, matchsticks, a chisel, and a coil of rope."
+      },
+      {
+        "command": "run",
+        "result": "Your courage fails you! As you turn to run, a loose stone gives way beneath your foot. You tumble down the hillside and wake up hours later at the base of the pyramid. GAME OVER",
+        "game_over": true
+      }
+
+    ]
+  },
+
+    "1": {
+      "name": "Antechamber",
+      "description": "Dusty walls show faint markings. There's a locked compartment here.",
+      "interactions": [
+        "Use chisel on compartment.",
+        "Go back."
+      ],
+      "critical_item": "Bronze Key"
     },
-    "khopesh": {
-      "name": "Rusted Khopesh",
-      "description": "A sickle-shaped sword",
-      "takeable": true
+    "2": {
+      "name": "Hall of Mirrors",
+      "description": "Dimly lit room with ancient mirrors and faded hieroglyphs.",
+      "interactions": [
+        "Use torch to reveal glyphs.",
+        "Inspect mirrors.",
+        "Go back."
+      ],
+      "critical_item": "Obsidian Mirror"
+    },
+    "3": {
+      "name": "Chamber of the Ankh",
+      "description": "A golden glow emits from a statue of Ra. The floor looks unstable.",
+      "interactions": [
+        "Use rope to cross safely.",
+        "Inspect statue.",
+        "Go back."
+      ],
+      "critical_item": "Golden Ankh"
+    },
+    "4": {
+      "name": "Judgment Room",
+      "description": "Anubis stands in judgment. A scale sits before you.",
+      "interactions": [
+        "Place items on scale.",
+        "Speak the oath.",
+        "Go back."
+      ],
+      "critical_item": "Scales of Ma’at"
+    },
+    "5": {
+      "name": "Flame Chamber",
+      "description": "A large brazier sits cold. Symbols on the wall depict fire rituals.",
+      "interactions": [
+        "Use torch to light Sacred Flame.",
+        "Inspect wall.",
+        "Go back."
+      ],
+      "critical_item": "Sacred Flame"
+    },
+    "6": {
+      "name": "Final Chamber",
+      "description": "A great scarab mechanism blocks the way. Five slots shimmer on its back.",
+      "interactions": [
+        "Insert all critical items.",
+        "Leave.",
+        "Go back."
+      ],
+      "critical_item": null
     }
+  },
+  "achievements": {
+    "Looter of the Nile": "Collect all 5 critical items.",
+    "Friend of Anubis": "Solve his puzzle without triggering the gas.",
+    "Master of Hieroglyphs": "Decode all riddles without hints.",
+    "Heir of Djoser": "Complete the game with all items and trigger the scarab’s release."
   }
 }
