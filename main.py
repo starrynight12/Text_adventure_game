@@ -2,6 +2,9 @@
 import json
 import re
 
+## TODO FIX HEALTH MECHANICS
+## if command is attempted without required items, allow the second route to occur
+
 # Valid verbs and their synonyms
 VERBS = {
     "go": ["move", "walk", "head", "travel", "enter", "proceed", "advance"],
@@ -139,7 +142,13 @@ class Game:
                     if ach not in self.achievements:
                         self.achievements.append(ach)
                         print(f"Achievement unlocked: {ach}")
-
+                if "health_impact" in action:
+                    impact = action["health_impact"]
+                    self.health += impact
+                    print(f"Your health is now: {self.health}")
+                    if self.health <= 0:
+                        print("You have perished. Game Over.")
+                        exit()
                 # Game over
                 if action.get("game_over"):
                     print("Game Over.")
