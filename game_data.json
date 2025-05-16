@@ -49,8 +49,8 @@
     "critical_item": "bronze_key",
     "interactions": [
       {
-        "command": "examine scroll",
-        "result": "You unroll the dusty scroll:\n\"Beware the path of sand; only the wise may walk unscathed. The scarab’s wings are bound by five: key, flame, mirror, scale, and life.\"",
+        "command": "inspect scroll",
+        "result": "You unroll the dusty scroll:\n\"Beware the path of sand; only the wise may walk unscathed. The scarab's wings are bound by five: key, flame, mirror, scale, and life.\"",
         "achievement": "Scholar of the Sands"
       },
       {
@@ -65,17 +65,17 @@
         "requires": ["chisel"],
         "result": "You pry open the compartment with your chisel!\nObtained BRONZE KEY!",
         "add_item": "bronze_key",
-        "achievement": "Jackal’s Secret",
+        "achievement": "Jackal's Secret",
         "critical_item": true
       },
       {
-        "command": "open door",
+        "command": "use door",
         "requires": ["bronze_key"],
         "result": "The bronze key fits! The stone door grinds open...",
         "next_room": 2
       },
       {
-        "command": "open door",
+        "command": "use door",
         "result": "The door shows five slots. A carving warns:\n\"Only those who gather the pharaoh's trials may pass\""
       },
       {
@@ -90,62 +90,193 @@
         "health_impact": -15
       }
     ]
-    },
-    "2": {
-      "name": "Hall of Mirrors",
-      "description": "Dimly lit room with ancient mirrors and faded hieroglyphs.",
-      "interactions": [
-        "Use torch to reveal glyphs.",
-        "Inspect mirrors.",
-        "Go back."
-      ],
-      "critical_item": "Obsidian Mirror"
-    },
-    "3": {
-      "name": "Chamber of the Ankh",
-      "description": "A golden glow emits from a statue of Ra. The floor looks unstable.",
-      "interactions": [
-        "Use rope to cross safely.",
-        "Inspect statue.",
-        "Go back."
-      ],
-      "critical_item": "Golden Ankh"
-    },
-    "4": {
-      "name": "Judgment Room",
-      "description": "Anubis stands in judgment. A scale sits before you.",
-      "interactions": [
-        "Place items on scale.",
-        "Speak the oath.",
-        "Go back."
-      ],
-      "critical_item": "Scales of Ma’at"
-    },
-    "5": {
-      "name": "Flame Chamber",
-      "description": "A large brazier sits cold. Symbols on the wall depict fire rituals.",
-      "interactions": [
-        "Use torch to light Sacred Flame.",
-        "Inspect wall.",
-        "Go back."
-      ],
-      "critical_item": "Sacred Flame"
-    },
-    "6": {
-      "name": "Final Chamber",
-      "description": "A great scarab mechanism blocks the way. Five slots shimmer on its back.",
-      "interactions": [
-        "Insert all critical items.",
-        "Leave.",
-        "Go back."
-      ],
-      "critical_item": null
-    }
   },
-  "achievements": {
-    "Looter of the Nile": "Collect all 5 critical items.",
-    "Friend of Anubis": "Solve his puzzle without triggering the gas.",
-    "Master of Hieroglyphs": "Decode all riddles without hints.",
-    "Heir of Djoser": "Complete the game with all items and trigger the scarab’s release."
+    "2": {
+    "name": "Chamber of Hieroglyphs",
+    "description": "The air grows colder as you enter a rectangular chamber. Faded blue hieroglyphs cover the walls, their glow dimmed by centuries of dust. A stone pedestal stands at the center, holding a rusted khopesh. To the east, a shadowy doorway promises progress.",
+    "critical_item": "obsidian_mirror",
+    "interactions": [
+      {
+        "command": "use torch",
+        "requires": ["torch"],
+        "result": "Hieroglyphs blaze to life!\nRiddle: 'I am the scribe of the gods, keeper of words. Speak my name to pass.'",
+        "achievement": "Light in the Darkness"
+      },
+      {
+        "command": "say thoth",
+        "requires": ["torch"],
+        "result": "A compartment opens! Revealed: OBSIDIAN MIRROR",
+        "add_item": "obsidian_mirror",
+        "achievement": "Voice of Thoth"
+      },
+      {
+        "command": "take khopesh",
+        "result": "The pedestal sinks! Spikes descend (-25 HP)",
+        "health_impact": -25,
+        "achievement": "Impulsive Looter"
+      },
+      {
+        "command": "take khopesh",
+        "requires": ["obsidian_mirror"],
+        "result": "You safely claim the ancient khopesh",
+        "add_item": "khopesh"
+      },
+      {
+        "command": "inspect door",
+        "result": "A scarab carving glows. Its empty eyes stare back.\nClue: 'The mirror reflects the truth unseen.'"
+      },
+      {
+        "command": "go east",
+        "requires": ["obsidian_mirror"],
+        "result": "The shadowy doorway accepts your mirror's reflection...",
+        "next_room": 3
+      },
+      {
+        "command": "go east",
+        "result": "Darkness repels you! The path remains sealed."
+      }
+    ]
+  },
+    "3": {
+    "name": "Hall of Traps",
+    "description": "You enter a narrow corridor lit by flickering oil lamps. The floor has stone tiles engraved with ankhs (☥) and chaos serpents (𓆙). A mural shows Pharaoh Djoser holding a Golden Ankh. A golden pedestal glints in the distance.",
+    "critical_item": "golden_ankh",
+    "interactions": [
+      {
+        "command": "inspect mural",
+        "result": "Hieroglyphs reveal: 'The righteous walk in the shadow of life'",
+        "achievement": "Historian's Eye"
+      },
+      {
+        "command": "take ankh",
+        "requires": ["khopesh"],
+        "result": "You slice the tripwire! Claimed GOLDEN ANKH",
+        "add_item": "golden_ankh",
+        "achievement": "Dancer of the Ankhs"
+      },
+      {
+        "command": "take ankh",
+        "result": "A dart fires from the pedestal! (-20 HP)",
+        "health_impact": -20
+      },
+      {
+        "command": "use chisel",
+        "requires": ["chisel"],
+        "result": "You pry open a hidden passage labeled 'Sekhmet's Path' (WARNING: Skips future rooms!)",
+        "next_room": 5,
+        "achievement": "Sekhmet’s Gambit"
+      },
+      {
+        "command": "go south",
+        "requires": ["golden_ankh"],
+        "result": "You carefully step on ankh tiles to safety...",
+        "next_room": 4
+      },
+      {
+        "command": "go south",
+        "result": "Serpent tiles trigger walls! (-15 HP)",
+        "health_impact": -15
+      }
+    ]
+  },
+    "4": {
+    "name": "Chamber of Anubis",
+    "description": "A towering obsidian statue of Anubis dominates the chamber, holding golden scales and a spear. Two urns - one with a feather, one with a serpent - flank the statue. A cold myrrh-scented draft whispers through cracks.",
+    "critical_item": "scales_of_maat",
+    "interactions": [
+      {
+        "command": "inspect scales",
+        "result": "Hieroglyphs translate: 'The heart must mirror the feather's truth, lest the serpent devour it.'"
+      },
+      {
+        "command": "use feather",
+        "result": "You find the SCALES OF MA'AT!",
+        "add_item": "scales_of_maat",
+        "achievement": "Judge's Favor"
+      },
+      {
+        "command": "use serpent",
+        "result": "Poisonous gas erupts! (-30 HP)",
+        "health_impact": -30,
+        "achievement": "Fool of Apep"
+      },
+      {
+        "command": "use ankh",
+        "requires": ["golden_ankh"],
+        "result": "Anubis' spear tilts toward the feather urn!",
+        "achievement": "Devotee of Anubis"
+      },
+      {
+        "command": "take scales",
+        "requires": ["khopesh"],
+        "result": "A hidden blade swings down! (-40 HP)",
+        "health_impact": -40,
+        "achievement": "Thief of the Duat"
+      },
+      {
+        "command": "go east",
+        "requires": ["scales_of_maat"],
+        "result": "The scales glow, revealing the path to the treasure...",
+        "next_room": 5
+      },
+      {
+        "command": "go east",
+        "result": "Anubis' spear blocks your path! You're not worthy yet."
+      }
+    ]
+  },
+  "5": {
+  "name": "Treasure Vault",
+  "description": "The vault shimmers with gold and jewels. At its center rests the Golden Scarab of Ra, wings spread wide. Curses cover the walls, and a five-slot stone slab blocks escape.",
+  "critical_item": "sacred_flame",
+  "interactions": [
+    {
+      "command": "return",
+      "result": "Go back",
+      "next_room": "1"
+    },
+    {
+      "command": "use items",
+      "requires": ["bronze_key", "obsidian_mirror", "golden_ankh", "scales_of_maat", "sacred_flame"],
+      "result": "The slots fill with light! The slab opens, revealing sunlight...\nYOU ESCAPE WITH THE SCARAB!",
+      "achievement": "Heir of Djoser",
+      "next_room": "victory"
+    },
+    {
+      "command": "use items",
+      "result": "The scarab's eyes flash RED! A sandstorm engulfs you... (-100 HP)",
+      "health_impact": -100
+    },
+    {
+      "command": "use brazier",
+      "requires": ["torch"],
+      "result": "You ignite the SACRED FLAME! (Final item acquired)",
+      "add_item": "sacred_flame"
+    },
+    {
+      "command": "solve curse",
+      "requires": ["obsidian_mirror"],
+      "result": "Mirror reveals: 'The scarab's wings carry the righteous to rebirth'",
+      "achievement": "Cursebreaker"
+    },
+    {
+      "command": "smash exit",
+      "requires": ["scales_of_maat"],
+      "result": "The ceiling collapses! (-50 HP)\nYou barely escape through cracks...",
+      "health_impact": -50,
+      "next_room": "partial_victory"
+    }
+  ]
+}
+  },
+  "victory": {
+    "name": "Victory",
+    "description": "You emerge from the pyramid, the Golden Scarab of Ra in hand. The sun shines brightly, and you feel a sense of accomplishment. You are now a legend!",
+    "interactions": []
+  },
+  "partial_victory": {
+    "name": "Partial Victory",
+    "description": "You escape with your life but without the Golden Scarab. The curse of the pyramid lingers in your mind.",
+    "interactions": []
   }
 }

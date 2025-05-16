@@ -7,22 +7,27 @@ VERBS = {
     "go": ["move", "walk", "head", "travel", "enter", "proceed", "advance"],
     "take": ["grab", "pick", "steal", "collect", "acquire"],
     "use": ["utilize", "employ", "apply", "operate" "open", "unlock",
-            "activate", "light", "cut"],
+            "activate", "light", "cut", "place", "put"],
+    "say": ["speak", "tell", "ask", "inquire", "call"],
+    "solve": ["decode", "figure", "crack", "interpret", "understand"],
     "inspect": ["read", "look", "examine", "see", "view", "observe", "glance"],
-    "smash": ["break", "shatter", "crack", "destroy"],
+    "smash": ["break", "shatter", "crack", "destroy", "force"],
     "push": ["move", "shove", "tilt", "nudge"],
     "run": ["exit", "leave", "stop", "end", "run", "flee", "es"],
     "help": ["assist", "aid", "guide", "support", "advise"],
     "inventory": ["items", "pack", "belongings", "gear", "stuff"],
+    "health": ["status", "condition", "well-being", "vitality", "HP"],
     "quit": ["terminate", "abandon"]
 }
 
 # direction/nouns
 DIRECTIONS = ["north", "south", "east", "west", "up", "down"]
 NOUNS = [
-    "key", "torch", "door", "scroll", "urn", "statue", "mirror", 
-    "ankh", "map", "flame", "rope", "scarab", "compartment"
+    "key", "torch", "door", "chisel", "scroll", "urn", "statue", "mirror",
+    "ankh", "map", "flame", "rope", "scarab", "compartment", "thoth",
+    "khopesh", "feather", "serpent", "scales", "brazier", "items", "curse", "exit"
 ]
+
 
 # parser
 def parse_input(user_input):
@@ -70,6 +75,11 @@ class Game:
         print("\nYour Inventory:")
         for item, info in self.inventory.items():
             print(f"- {item}: {info['description']}")
+
+    def display_health(self):
+        print("\nYour Health:")
+        # TODO: Add health display logic
+        print(f"Health: {self.health}")
 
     def get_item_data(self, item_name):
         return self.items.get(item_name, {"description": "An unknown item."})
@@ -141,14 +151,16 @@ class Game:
                     self.current_room = action["next_room"]
 
                 return
-
-        if verb == "help":
+        if verb == "health":
+            self.display_health()
+        elif verb == "help":
             print("\nYou can try commands like:")
             print("- go [direction/next]")
             print("- take [item]")
             print("- use [item]")
             print("- inspect [item]")
             print("- inventory")
+            print("- health")
             print("- quit")
         else:
             print("That command isn't recognized.")
