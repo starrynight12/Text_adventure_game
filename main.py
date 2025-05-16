@@ -24,7 +24,7 @@ VERBS = {
 DIRECTIONS = ["north", "south", "east", "west", "up", "down"]
 NOUNS = [
     "key", "torch", "door", "chisel", "scroll", "urn", "statue", "mirror",
-    "ankh", "map", "flame", "rope", "scarab", "compartment", "thoth",
+    "ankh", "map", "flame", "rope", "scarab", "compartment", "thoth", "mural",
     "khopesh", "feather", "serpent", "scales", "brazier", "items", "curse", "exit"
 ]
 
@@ -78,7 +78,6 @@ class Game:
 
     def display_health(self):
         print("\nYour Health:")
-        # TODO: Add health display logic
         print(f"Health: {self.health}")
 
     def get_item_data(self, item_name):
