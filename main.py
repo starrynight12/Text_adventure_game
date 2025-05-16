@@ -13,7 +13,7 @@ VERBS = {
     "inspect": ["read", "look", "examine", "see", "view", "observe", "glance"],
     "smash": ["break", "shatter", "crack", "destroy", "force"],
     "push": ["move", "shove", "tilt", "nudge"],
-    "run": ["exit", "leave", "stop", "end", "run", "flee", "es"],
+    "run": ["exit", "leave", "stop", "end", "run", "flee", "return"],
     "help": ["assist", "aid", "guide", "support", "advise"],
     "inventory": ["items", "pack", "belongings", "gear", "stuff"],
     "health": ["status", "condition", "well-being", "vitality", "HP"],
