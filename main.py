@@ -8,11 +8,11 @@ import re
 VERBS = {
     "go": ["move", "walk", "head", "travel", "enter", "proceed", "advance"],
     "take": ["grab", "pick", "steal", "collect", "acquire"],
-    "use": ["utilize", "employ", "apply", "operate" "open", "unlock",
+    "use": ["utilize", "employ", "apply", "operate", "open", "unlock",
             "activate", "light", "cut", "place", "put"],
     "say": ["speak", "tell", "ask", "inquire", "call"],
     "solve": ["decode", "figure", "crack", "interpret", "understand"],
-    "inspect": ["read", "look", "examine", "see", "view", "observe", "glance"],
+    "inspect": ["read", "look", "examine", "see", "view", "observe", "glance", "analyze"],
     "smash": ["break", "shatter", "crack", "destroy", "force"],
     "push": ["move", "shove", "tilt", "nudge"],
     "run": ["exit", "leave", "stop", "end", "run", "flee", "return"],
@@ -179,6 +179,7 @@ class Game:
             print("- use [item]")
             print("- inspect [item]")
             print("- inventory")
+            print("- use hint")
             print("- health")
             print("- quit")
         else:

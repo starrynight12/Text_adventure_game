@@ -54,6 +54,10 @@
         "achievement": "Scholar of the Sands"
       },
       {
+        "command": "use hint",
+        "result": "take a closer look at the statue..."
+      },
+      {
         "command": "smash urn",
         "requires": ["chisel"],
         "result": "The urn shatters! Inside you find:\n- A map scrap: 'Hall of Traps lies east of Anubis' judgment'",
@@ -93,7 +97,7 @@
   },
     "2": {
     "name": "Chamber of Hieroglyphs",
-    "description": "The air grows colder as you enter a rectangular chamber. Faded blue hieroglyphs cover the walls, their glow dimmed by centuries of dust. A stone pedestal stands at the center, holding a rusted khopesh. To the east, a shadowy doorway promises progress.",
+    "description": "The air grows colder as you enter a rectangular chamber. Faded blue hieroglyphs cover the walls, their glow dimmed by centuries of dust. A stone pedestal stands at the center, holding a rusted khopesh. A stone snake sits curled at the base. To the east, a shadowy doorway promises progress.",
     "critical_item": "obsidian_mirror",
     "interactions": [
       {
@@ -116,15 +120,20 @@
       },
       {
         "command": "take khopesh",
-        "result": "The pedestal sinks! Spikes descend (-25 HP)",
-        "health_impact": -25,
-        "achievement": "Impulsive Looter"
-      },
-      {
-        "command": "take khopesh",
         "requires": ["obsidian_mirror"],
         "result": "You safely claim the ancient khopesh",
         "add_item": "khopesh"
+      },
+      {
+        "command": "touch snake",
+        "result": "The snake springs to life! It bites you (-25 HP)",
+        "health_impact": -25
+      },
+      {
+        "command": "take khopesh",
+        "result": "The pedestal sinks! Spikes descend (-25 HP)",
+        "health_impact": -25,
+        "achievement": "Impulsive Looter"
       },
       {
         "command": "inspect door",
