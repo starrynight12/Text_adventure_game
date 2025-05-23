@@ -99,8 +99,13 @@
       {
         "command": "use torch",
         "requires": ["torch"],
-        "result": "Hieroglyphs blaze to life!\nRiddle: 'I am the scribe of the gods, keeper of words. Speak my name to pass.'",
+        "result": "Hieroglyphs blaze to life!\nRiddle: 'I am the scribe of the gods, Thoth, keeper of words. Speak my name to pass.'",
         "achievement": "Light in the Darkness"
+      },
+      {
+        "command": "use hint",
+        "result": "Try saying 'Thoth' to the pedestal.",
+        "achievement": "Scribe's secret"
       },
       {
         "command": "say thoth",
@@ -164,7 +169,7 @@
         "requires": ["chisel"],
         "result": "You pry open a hidden passage labeled 'Sekhmet's Path' (WARNING: Skips future rooms!)",
         "next_room": 5,
-        "achievement": "Sekhmet’s Gambit"
+        "achievement": "Sekhmet's Gambit"
       },
       {
         "command": "go south",
@@ -233,7 +238,7 @@
     {
       "command": "return",
       "result": "Go back",
-      "next_room": "1"
+      "next_room": 1
     },
     {
       "command": "use items",

@@ -2,8 +2,7 @@
 import json
 import re
 
-## TODO FIX HEALTH MECHANICS
-## if command is attempted without required items, allow the second route to occur
+# if command is attempted without required items, allow the second route to occur
 
 # Valid verbs and their synonyms
 VERBS = {
@@ -28,7 +27,8 @@ DIRECTIONS = ["north", "south", "east", "west", "up", "down"]
 NOUNS = [
     "key", "torch", "door", "chisel", "scroll", "urn", "statue", "mirror",
     "ankh", "map", "flame", "rope", "scarab", "compartment", "thoth", "mural",
-    "khopesh", "feather", "serpent", "scales", "brazier", "items", "curse", "exit"
+    "khopesh", "feather", "serpent", "scales", "brazier", "items", "curse", 
+    "exit", "hint"
 ]
 
 
@@ -147,7 +147,18 @@ class Game:
                     self.health += impact
                     print(f"Your health is now: {self.health}")
                     if self.health <= 0:
-                        print("You have perished. Game Over.")
+                        print("You have perished.")
+                        print("""
+                                  ___________
+                                 /           \
+                                | R.I.P.      |
+                                | Adventurer  |
+                                | Health: 0   |
+                                |_____________|
+                                    |   |
+                                    |   |
+                                    |___|_
+                              """)
                         exit()
                 # Game over
                 if action.get("game_over"):
