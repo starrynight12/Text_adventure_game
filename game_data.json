@@ -27,6 +27,10 @@
     "intro": true,
     "interactions": [
       {
+        "command": "use hint",
+        "result": "Seriously? just go inside already! Say: 'go' to enter the pyramid."
+      },
+      {
         "command": "go",
         "result": "You light your torch and step through the ancient doorway... The air grows cold as you enter the pyramid proper.",
         "next_room": 1
@@ -49,13 +53,17 @@
     "critical_item": "bronze_key",
     "interactions": [
       {
+        "command": "return",
+        "result": "You can't do that anymore. You need to find a way forward."
+      },
+      {
         "command": "inspect scroll",
         "result": "You unroll the dusty scroll:\n\"Beware the path of sand; only the wise may walk unscathed. The scarab's wings are bound by five: key, flame, mirror, scale, and life.\"",
         "achievement": "Scholar of the Sands"
       },
       {
         "command": "use hint",
-        "result": "take a closer look at the statue..."
+        "result": "take a closer look at the statue...Have you checked the urn?"
       },
       {
         "command": "smash urn",
@@ -97,9 +105,14 @@
   },
     "2": {
     "name": "Chamber of Hieroglyphs",
-    "description": "The air grows colder as you enter a rectangular chamber. Faded blue hieroglyphs cover the walls, their glow dimmed by centuries of dust. A stone pedestal stands at the center, holding a rusted khopesh. A stone snake sits curled at the base. To the east, a shadowy doorway promises progress.",
+    "description": "The air grows colder as you enter a rectangular chamber. Faded blue hieroglyphs cover the walls, shrouded by darkness, their glow dimmed by centuries of dust. A stone eagle-headed statue stands at the center, holding a rusted khopesh. It seems loose in the statue's hands. A stone snake sits curled at the base. To the east, a shadowy doorway promises progress.",
     "critical_item": "obsidian_mirror",
     "interactions": [
+      {
+        "command": "return",
+        "result": "Go back",
+        "next_room": 1
+      },
       {
         "command": "use torch",
         "requires": ["torch"],
@@ -125,7 +138,7 @@
         "add_item": "khopesh"
       },
       {
-        "command": "touch snake",
+        "command": "take snake",
         "result": "The snake springs to life! It bites you (-25 HP)",
         "health_impact": -25
       },
@@ -153,18 +166,23 @@
   },
     "3": {
     "name": "Hall of Traps",
-    "description": "You enter a narrow corridor lit by flickering oil lamps. The floor has stone tiles engraved with ankhs (☥) and chaos serpents (𓆙). A mural shows Pharaoh Djoser holding a Golden Ankh. A golden pedestal glints in the distance.",
+    "description": "You enter a narrow corridor lit by flickering oil lamps. The floor has stone tiles engraved with ankhs (☥) and chaos serpents (𓆙). A mural on the far wall shows Pharaoh Djoser holding a Golden Ankh. You can't pick out the rest at this distance. A golden pedestal glints through a corridor on the south wall.",
     "critical_item": "golden_ankh",
     "interactions": [
       {
+        "command": "return",
+        "result": "Go back",
+        "next_room": 2
+      },
+      {
         "command": "inspect mural",
-        "result": "Hieroglyphs reveal: 'The righteous walk in the shadow of life'",
+        "result": "Hieroglyphs reveal: 'Only the ankh's light can guide you through the serpent's chaos.'\n On closer inspection, the golden ankh in Pharaoh Djoser's hand looks different from the rest of the mural.",
         "achievement": "Historian's Eye"
       },
       {
         "command": "take ankh",
         "requires": ["khopesh"],
-        "result": "You slice the tripwire! Claimed GOLDEN ANKH",
+        "result": "You pick up the ankh of on the mural and decide to take the path of the ankhs. You use your khopesh to slice the tripwire! Claimed GOLDEN ANKH",
         "add_item": "golden_ankh",
         "achievement": "Dancer of the Ankhs"
       },
@@ -176,7 +194,7 @@
       {
         "command": "use chisel",
         "requires": ["chisel"],
-        "result": "You pry open a hidden passage labeled 'Sekhmet's Path' (WARNING: Skips future rooms!)",
+        "result": "You pry open a hidden passage labeled 'Sekhmet's Path'",
         "next_room": 5,
         "achievement": "Sekhmet's Gambit"
       },
@@ -195,9 +213,18 @@
   },
     "4": {
     "name": "Chamber of Anubis",
-    "description": "A towering obsidian statue of Anubis dominates the chamber, holding golden scales and a spear. Two urns - one with a feather, one with a serpent - flank the statue. A cold myrrh-scented draft whispers through cracks.",
+    "description": "A towering obsidian statue of Anubis dominates the chamber, holding golden scales and a spear. Two urns - one with a feather, one with a serpent - flank the statue. A cold myrrh-scented draft whispers through the corridor to the east. Could this lead to the exit?",
     "critical_item": "scales_of_maat",
     "interactions": [
+      {
+        "command": "return",
+        "result": "Go back",
+        "next_room": 3
+      },
+      {
+        "command": "use hint",
+        "result": "It looks like you have to choose one side of the scale. Will it be the feather or the serpent? The ankh might help you decide."
+      },
       {
         "command": "inspect scales",
         "result": "Hieroglyphs translate: 'The heart must mirror the feather's truth, lest the serpent devour it.'"
@@ -228,6 +255,12 @@
         "achievement": "Thief of the Duat"
       },
       {
+        "command": "take spear",
+        "result": "Ouch that's pointy! A spear that big doesn't look to useful to you (-5 HP)",
+        "health_impact": -5,
+        "achievement": "That's too much..."
+      },
+      {
         "command": "go east",
         "requires": ["scales_of_maat"],
         "result": "The scales glow, revealing the path to the treasure...",
@@ -248,6 +281,10 @@
       "command": "return",
       "result": "Go back",
       "next_room": 1
+    },
+    {
+      "command": "use hint",
+      "result": "It look like you need to place the items you have collected so far... But first, why don't you light the brazier?"
     },
     {
       "command": "use items",

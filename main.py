@@ -7,9 +7,9 @@ import re
 # Valid verbs and their synonyms
 VERBS = {
     "go": ["move", "walk", "head", "travel", "enter", "proceed", "advance"],
-    "take": ["grab", "pick", "steal", "collect", "acquire"],
+    "take": ["grab", "pick", "steal", "collect", "acquire", "touch"],
     "use": ["utilize", "employ", "apply", "operate", "open", "unlock",
-            "activate", "light", "cut", "place", "put"],
+            "activate", "light", "cut", "place", "put", "choose"],
     "say": ["speak", "tell", "ask", "inquire", "call"],
     "solve": ["decode", "figure", "crack", "interpret", "understand"],
     "inspect": ["read", "look", "examine", "see", "view", "observe", "glance", "analyze"],
@@ -28,7 +28,7 @@ NOUNS = [
     "key", "torch", "door", "chisel", "scroll", "urn", "statue", "mirror",
     "ankh", "map", "flame", "rope", "scarab", "compartment", "thoth", "mural",
     "khopesh", "feather", "serpent", "scales", "brazier", "items", "curse", 
-    "exit", "hint"
+    "exit", "hint", "snake"
 ]
 
 
@@ -148,13 +148,12 @@ class Game:
                     print(f"Your health is now: {self.health}")
                     if self.health <= 0:
                         print("You have perished.")
-                        print("""
-                                  ___________
-                                 /           \
-                                | R.I.P.      |
-                                | Adventurer  |
-                                | Health: 0   |
-                                |_____________|
+                        print("""___________
+                              /           \
+                              | R.I.P.      |
+                              | Adventurer  |
+                              | Health: 0   |
+                              |_____________|
                                     |   |
                                     |   |
                                     |___|_
@@ -189,7 +188,7 @@ class Game:
         if self.current_room == 6:
             required = [
                 "Bronze Key", "Obsidian Mirror", "Golden Ankh",
-                "Scales of Ma’at", "Sacred Flame"
+                "Scales of Ma'at", "Sacred Flame"
             ]
             if all(item in self.collected_items for item in required):
                 print("\nYou place the Key, Mirror, Ankh, Scales, and Flame into the slots.")
