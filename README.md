@@ -1,13 +1,17 @@
 # <h1>Text Adventure Game</h1>
-
- ### [YouTube Demonstration](to be added)
+ ### [YouTube Demonstration] https://youtu.be/ey9_i1XemcE
 
 <h2>Description</h2>
-Project is an adventure game designed to take in user input and interpret it to continue with the game
-
+Project is an adventure game designed to take in user input in verb-noun form and follow through the adventure game.
 <br />
 
+<h2>How to run/:</h2>
 
+- Download files into a single folder.
+- cd into the directory containing files.
+- make sure you have python installed.
+- to start the game: python main.py
+- 
 <h2>Languages and Utilities Used</h2>
 
 - <b>Python</b> 
